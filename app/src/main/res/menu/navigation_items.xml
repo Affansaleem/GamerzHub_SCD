@@ -12,6 +12,11 @@
         android:icon="@drawable/orders"
         />
     <item
+        android:id="@+id/contactus"
+        android:title="ContactUs"
+        android:icon="@drawable/cart"
+        />
+    <item
         android:id="@+id/logout"
         android:title="Logout"
         android:icon="@drawable/logout"

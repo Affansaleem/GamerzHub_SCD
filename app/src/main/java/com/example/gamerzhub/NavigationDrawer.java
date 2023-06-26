@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -44,7 +45,7 @@ public class NavigationDrawer extends AppCompatActivity {
 
         // By default fragment loaded
 
-        loadFragment(new container_fragment());
+        loadFragment(new container_fragment(),R.id.container);
         // Now to select from navigation menu items we use
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -55,17 +56,23 @@ public class NavigationDrawer extends AppCompatActivity {
                 if (id==R.id.home)
                 {
 
-                    loadFragment(new container_fragment());
+                    loadFragment(new container_fragment(),R.id.container);
 
 
-                } else if (id==R.id.orders) {
-                    loadFragment(new container_fragment());
+                }
+                else if (id==R.id.orders)
+                {
+                    loadFragment(new container_fragment(),R.id.container);
+                }
+                else if (id==R.id.contactus)
+                {
+                    loadFragment(new contactUs(),R.id.contactus_container);
                 }
                 else {
                     // obvious then logout
 
-                    loadFragment(new container_fragment());
-
+                    Intent ret=new Intent(NavigationDrawer.this,SignUppage.class);
+                    startActivity(ret);
                 }
 
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -95,12 +102,12 @@ public class NavigationDrawer extends AppCompatActivity {
 
     }
 
-    private void loadFragment(Fragment frag) {
+    private void loadFragment(Fragment frag,int containerId) {
 
         FragmentManager manager= getSupportFragmentManager();
-        FragmentTransaction transaction= manager.beginTransaction();
-        transaction.add(R.id.container,frag);
-        transaction.commit();
+        manager.beginTransaction()
+        .replace(containerId, frag)
+        .commit();
 
     }
 
